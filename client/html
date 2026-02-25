@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project</title>
+
+    <link rel="stylesheet" href="../css/index.css" />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <div id="menu">
+      <p id="website-name">Temporary name - Game</p>
+
+      <hr />
+    </div>
+
+    <div id="footer">
+      <hr />
+
+      <p id="watermark">
+        This website was created by Dominykas, Danielius, Peculiar, Hassan J.
+      </p>
+
+      <a
+        href="https://github.com/h-i-d-d-e-n/Internet-Technologies-Project"
+        id="github"
+      >
+        <img src="../images/github.png" alt="GitHub Logo" id="" />
+
+        Group Github Repository
+      </a>
+    </div>
+  </body>
+</html>
