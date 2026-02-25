@@ -1,0 +1,40 @@
+* {
+  font-family: "Montserrat", sans-serif;
+}
+
+body {
+  margin: 0px;
+}
+
+#menu {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 24px;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 10px;
+  line-height: 15px;
+}
+
+#watermark {
+  text-align: center;
+}
+
+#github {
+  color: black;
+  text-decoration: none;
+}
+
+#github:hover {
+  color: black;
+}
+
+#github img {
+  width: 15px;
+  height: 15px;
+}
