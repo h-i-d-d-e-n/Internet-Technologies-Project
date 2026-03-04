@@ -7,12 +7,15 @@
 
     <link rel="stylesheet" href="../css/index.css" />
 
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
     <div id="header">
-      <p id="website-name"> <h1>Temporary name - Game</h1> </p>
+      <h1 id="website-name">Temporary name - Game</h1>
       <hr />
       <div id="menu">
         <div class="menu-item">
@@ -30,6 +33,14 @@
       <hr />
     </div>
 
+    <!-- Canvas -->
+
+    <div id="game-container">
+      <canvas id="gameCanvas" width="800" height="600"></canvas>
+    </div>
+
+    <!-- End of Canvas -->
+
     <div id="footer">
       <hr />
 
@@ -46,5 +57,7 @@
         Group Github Repository
       </a>
     </div>
+
+    <script src="../javascript/moving_box_attempt.js"></script>
   </body>
 </html>
