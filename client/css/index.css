@@ -73,6 +73,20 @@ body {
 
 /* ----------------------------------------- */
 
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 40px;
+}
+
+#gameCanvas {
+  border: 1px solid black;
+}
+
+/* ----------------------------------------- */
+
 #footer {
   position: fixed;
   bottom: 0;
