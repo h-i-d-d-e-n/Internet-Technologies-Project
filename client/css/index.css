@@ -81,10 +81,45 @@ body {
   margin-top: 40px;
 }
 
-#gameCanvas {
-  border: 1px solid black;
+#game-area {
+  width: fit-content;
+  margin: 40px auto 0;
 }
 
+#game-toolbar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+}
+
+#fullscreen-btn {
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #00000019;
+  color: black;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#fullscreen-btn:hover {
+  background-color: #0000002a;
+}
+
+#fullscreen-btn:active {
+  transform: scale(0.98);
+}
+
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 /* ----------------------------------------- */
 
 #footer {
