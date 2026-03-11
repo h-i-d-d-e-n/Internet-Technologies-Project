@@ -4,8 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Project</title>
+    <meta name="description" content="Sidescroller game" />
 
-    <link rel="stylesheet" href="../css/index.css" />
+    <link rel="stylesheet" href="./css/index.css" />
 
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap"
@@ -35,8 +36,12 @@
 
     <!-- Canvas -->
 
-    <div id="game-container">
-      <canvas id="gameCanvas" width="800" height="600"></canvas>
+    <div id="game-area">
+      <div id="game-toolbar">
+        <button id="fullscreen-btn">Fullscreen</button>
+      </div>
+
+      <div id="game-container"></div>
     </div>
 
     <!-- End of Canvas -->
@@ -52,12 +57,12 @@
         href="https://github.com/h-i-d-d-e-n/Internet-Technologies-Project"
         id="github"
       >
-        <img src="../images/github.png" alt="GitHub Logo" />
+        <img src="./images/github.png" alt="GitHub Logo" />
 
         Group Github Repository
       </a>
     </div>
 
-    <script src="../javascript/moving_box_attempt.js"></script>
+    <script type="module" src="./javascript/main.js"></script>
   </body>
 </html>
