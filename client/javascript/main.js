@@ -1,5 +1,5 @@
 // WORLD SETTINGS
-import { Application } from "pixi.js";
+import * as PIXI from "pixi.js";
 import { createPlayer } from "./player.js";
 import { createStateManager } from "./state-manager.js";
 import { input } from "./input.js";
@@ -13,7 +13,7 @@ import { createBackground } from "./grass-background.js";
 import { createMountainBackground } from "./mountain-background.js";
 import { createObstacleManager } from "./obstacles.js";
 
-const app = new Application();
+const app = new PIXI.Application();
 const stateManager = createStateManager();
 
 /* -------------------------
@@ -188,7 +188,6 @@ async function startGame() {
     document.getElementById("blur-overlay").style.opacity = "0";
     document.getElementById("fade-overlay").style.opacity = "0";
 
-    // START SCORE
     scoreInterval = setInterval(() => {
       if (!gameOver) {
         score++;
@@ -279,7 +278,6 @@ async function startGame() {
           gameOver = true;
 
           app.ticker.stop();
-
           clearInterval(scoreInterval);
 
           triggerDeath();
