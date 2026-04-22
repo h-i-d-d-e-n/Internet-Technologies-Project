@@ -1,1 +1,4 @@
-
+npm install
+npm install pixi.js
+npm install vite
+npm run dev (if cant locate package.json - "cd client" to go to client first and then do "npm run dev")
