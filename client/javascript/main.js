@@ -188,6 +188,7 @@ async function startGame() {
     document.getElementById("blur-overlay").style.opacity = "0";
     document.getElementById("fade-overlay").style.opacity = "0";
 
+    // START SCORE
     scoreInterval = setInterval(() => {
       if (!gameOver) {
         score++;
@@ -278,6 +279,7 @@ async function startGame() {
           gameOver = true;
 
           app.ticker.stop();
+
           clearInterval(scoreInterval);
 
           triggerDeath();
