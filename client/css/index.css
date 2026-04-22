@@ -73,23 +73,179 @@ body {
 
 /* ----------------------------------------- */
 
-#game-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  margin-top: 40px;
-}
-
 #game-area {
   width: fit-content;
   margin: 40px auto 0;
+  position: relative;
 }
 
 #game-toolbar {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 10px;
+}
+
+#game-wrapper {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container {
+  display: block;
+}
+
+#vignette {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  pointer-events: none;
+
+  background: radial-gradient(
+    circle at center,
+    rgba(0, 0, 0, 0) 60%,
+    rgba(0, 0, 0, 0.5) 100%
+  );
+
+  z-index: 8;
+
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+#play-btn,
+#difficulty-btn {
+  position: absolute;
+  image-rendering: pixelated;
+
+  transform: translateX(-350%);
+  transition: transform 0.25s ease;
+
+  z-index: 20;
+}
+
+/* positions */
+#play-btn {
+  top: 10%; /* ↑↓ moves it up/down */
+  left: 20%; /* ←→ moves it left/right */
+  width: 550px;
+}
+
+#difficulty-btn {
+  top: 40%;
+  left: 26%;
+  transform: translateX(-50%) translateX(-350%);
+  width: 450px;
+}
+
+/* entrance */
+#play-btn.active,
+#difficulty-btn.active {
+  transform: translateX(-50%) translateX(0);
+}
+
+/* hover */
+#play-btn.active.hovered,
+#difficulty-btn.active.hovered {
+  transform: translateX(-50%) translateX(0) scale(1.05);
+  filter: brightness(1.15);
+}
+
+/* click */
+#play-btn.active.pressed,
+#difficulty-btn.active.pressed {
+  transform: translateX(-50%) translateX(0) scale(0.95);
+}
+
+/* images */
+#play-btn img,
+#difficulty-btn img {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  pointer-events: none;
+  user-select: none;
+  /* compensate for transparent padding */
+  transform: translateY(-25%);
+}
+
+/* HITBOXES (full control, no guessing) */
+.hitbox {
+  position: absolute;
+  cursor: pointer;
+  background: rgba(255, 0, 0, 0);
+
+  z-index: 30;
+}
+
+/* PLAY */
+.play-hitbox {
+  top: calc(15%);
+  left: 35%;
+  width: 30%;
+  height: 14%;
+}
+
+/* DIFFICULTY */
+.difficulty-hitbox-easy {
+  top: 25%;
+  left: 20%;
+  width: 13%;
+  height: 6%;
+}
+
+.difficulty-hitbox-medium {
+  top: 25%;
+  left: 39%;
+  width: 21%;
+  height: 6%;
+}
+
+.difficulty-hitbox-hard {
+  top: 25%;
+  left: 66%;
+  width: 16%;
+  height: 6%;
+}
+
+/* blur */
+.blur {
+  filter: blur(6px);
+  transition: filter 0.5s ease;
+}
+
+#blur-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: blur(6px);
+
+  z-index: 5;
+  pointer-events: none;
+}
+
+#fade-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  background: black;
+
+  z-index: 10;
+
+  opacity: 1;
+  transition: opacity 5s ease;
 }
 
 #fullscreen-btn {
@@ -115,11 +271,68 @@ body {
   transform: scale(0.98);
 }
 
+/* FULLSCREEN TAKEOVER */
+:fullscreen body * {
+  visibility: hidden;
+}
+
+:fullscreen #game-wrapper,
+:fullscreen #game-wrapper * {
+  visibility: visible;
+}
+
+/* make wrapper fill screen */
+:fullscreen #game-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 9999;
+} /* FULLSCREEN TAKEOVER */
+:fullscreen body * {
+  visibility: hidden;
+}
+
+:fullscreen #game-wrapper,
+:fullscreen #game-wrapper * {
+  visibility: visible;
+}
+
+/* make wrapper fill screen */
+:fullscreen #game-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  z-index: 9999;
+}
+
 #game-container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 /* ----------------------------------------- */
 
 #footer {
