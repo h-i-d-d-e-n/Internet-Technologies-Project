@@ -1,4 +1,4 @@
-import { Assets, Sprite } from "pixi.js";
+import * as PIXI from "pixi.js";
 import { ROAD_BASE_SPEED } from "./floor.js";
 
 export async function createObstacleManager(app) {

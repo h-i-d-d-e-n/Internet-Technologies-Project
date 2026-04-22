@@ -1,4 +1,4 @@
-import { Assets, Container, Sprite } from "pixi.js";
+import * as PIXI from "pixi.js";
 
 class GrassBackground {
   constructor(app, grassTexture, treeTexture) {

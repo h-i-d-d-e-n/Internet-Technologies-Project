@@ -1,4 +1,4 @@
-import { Assets, Sprite } from "pixi.js";
+import * as PIXI from "pixi.js";
 
 export async function createClouds(app) {
   const texture = await Assets.load("/assets/cloud.png");

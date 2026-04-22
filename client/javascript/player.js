@@ -1,4 +1,4 @@
-import { AnimatedSprite, Rectangle, Texture } from "pixi.js";
+import * as PIXI from "pixi.js";
 
 export async function createPlayer(app) {
   const response = await fetch("/assets/project-player-temp.json");

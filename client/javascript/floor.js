@@ -1,4 +1,4 @@
-import { Assets, Sprite } from "pixi.js";
+import * as PIXI from "pixi.js";
 
 export const ROAD_BASE_SPEED = 0.8;
 
