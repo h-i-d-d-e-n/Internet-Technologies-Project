@@ -1,14 +1,16 @@
 import { Assets, Sprite } from "pixi.js";
 
+export const ROAD_BASE_SPEED = 0.8;
+
 export async function createFloor(app) {
   const texture = await Assets.load("/assets/road-loop.png");
 
   const segmentWidth = texture.width;
-  const speed = 0.8;
   const floors = [];
 
   for (let i = 0; i < 3; i++) {
     const floor = new Sprite(texture);
+
     floor.y = app.screen.height - texture.height;
     floor.x = i * segmentWidth;
 
@@ -16,7 +18,9 @@ export async function createFloor(app) {
     floors.push(floor);
   }
 
-  app.ticker.add(() => {
+  function update(multiplier = 1) {
+    const speed = ROAD_BASE_SPEED * multiplier;
+
     for (const floor of floors) {
       floor.x -= speed;
     }
@@ -27,5 +31,7 @@ export async function createFloor(app) {
         floor.x = rightMost + segmentWidth;
       }
     }
-  });
+  }
+
+  return { update };
 }
