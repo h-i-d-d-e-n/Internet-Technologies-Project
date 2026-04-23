@@ -1,7 +1,7 @@
 import { Assets, Sprite } from "pixi.js";
 
 export async function createClouds(app) {
-  const texture = await Assets.load("./assets/cloud.png");
+  const texture = await Assets.load("/client/assets/cloud.png");
 
   const speed = 0.1;
   const clouds = [];

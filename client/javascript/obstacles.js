@@ -2,8 +2,8 @@ import { Assets, Sprite } from "pixi.js";
 import { ROAD_BASE_SPEED } from "./floor.js";
 
 export async function createObstacleManager(app) {
-  const barrierTexture = await Assets.load("./assets/warning-tape.png");
-  const signTexture = await Assets.load("./assets/road-sign.png");
+  const barrierTexture = await Assets.load("/client/assets/warning-tape.png");
+  const signTexture = await Assets.load("/client/assets/road-sign.png");
 
   const obstacles = [];
 

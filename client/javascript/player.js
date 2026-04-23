@@ -1,7 +1,7 @@
 import { AnimatedSprite, Rectangle, Texture, Assets } from "pixi.js";
 
 export async function createPlayer(app) {
-  const response = await fetch("./assets/project-player-temp.json");
+  const response = await fetch("/client/assets/project-player-temp.json");
   const data = await response.json();
 
   const image = new Image();

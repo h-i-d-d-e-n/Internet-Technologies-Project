@@ -48,7 +48,7 @@ class MountainBackground {
 }
 
 export async function createMountainBackground(app) {
-  const texture = await Assets.load("./assets/mountain.png");
+  const texture = await Assets.load("/client/assets/mountain.png");
 
   const background = new MountainBackground(app, texture);
   app.stage.addChild(background.container);
