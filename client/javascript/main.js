@@ -150,23 +150,20 @@ async function startGame() {
   ------------------------- */
 
   function resizeGame() {
-    const baseWidth = 900;
-    const baseHeight = 500;
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
 
-    const scale = Math.min(
-      window.innerWidth / baseWidth,
-      window.innerHeight / baseHeight
-    );
+  // resize renderer to full screen
+  app.renderer.resize(screenWidth, screenHeight);
 
-    app.renderer.resize(baseWidth, baseHeight);
+  // make canvas fill screen
+  app.view.style.width = `${screenWidth}px`;
+  app.view.style.height = `${screenHeight}px`;
 
-    app.view.style.width = `${baseWidth * scale}px`;
-    app.view.style.height = `${baseHeight * scale}px`;
-
-    app.view.style.position = "absolute";
-    app.view.style.left = `${(window.innerWidth - baseWidth * scale) / 2}px`;
-    app.view.style.top = `${(window.innerHeight - baseHeight * scale) / 2}px`;
-  }
+  app.view.style.position = "absolute";
+  app.view.style.left = "0px";
+  app.view.style.top = "0px";
+}
 
   document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
