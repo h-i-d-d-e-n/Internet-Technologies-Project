@@ -1,5 +1,5 @@
 // WORLD SETTINGS
-import * as PIXI from "pixi.js";
+import { Application } from "pixi.js";
 import { createPlayer } from "./player.js";
 import { createStateManager } from "./state-manager.js";
 import { input } from "./input.js";
@@ -13,7 +13,7 @@ import { createBackground } from "./grass-background.js";
 import { createMountainBackground } from "./mountain-background.js";
 import { createObstacleManager } from "./obstacles.js";
 
-const app = new PIXI.Application();
+const app = new Application();
 const stateManager = createStateManager();
 
 /* -------------------------
@@ -47,13 +47,13 @@ async function startGame() {
     return;
   }
 
-  await app.init({
+  const app = new Application({
     width: 900,
     height: 500,
     backgroundColor: 0x9bd2ff,
   });
 
-  gameContainer.appendChild(app.canvas);
+  gameContainer.appendChild(app.view);
 
   /* -------------------------
      SCORE SYSTEM
