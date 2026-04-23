@@ -15,10 +15,7 @@ export async function createPlayer(app) {
     .map((key) => {
       const f = data.frames[key].frame;
 
-      return new Texture({
-        source: atlas.source,
-        frame: new Rectangle(f.x, f.y, f.w, f.h),
-      });
+      return new Texture(atlas.baseTexture, new Rectangle(f.x, f.y, f.w, f.h));
     });
 
   const player = new AnimatedSprite(frames);
