@@ -3,84 +3,93 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project</title>
+    <title>Endless Runner!</title>
     <meta name="description" content="Sidescroller game" />
 
     <link rel="stylesheet" href="./css/index.css" />
-
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;300;400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
   </head>
 
   <body>
-    <div id="header">
-      <h1 id="website-name">Temporary name - Game</h1>
-      <hr />
-      <div id="menu">
-        <div class="menu-item">
-          <a href="#">Temp</a>
+    <div id="page-shell">
+      <header id="site-header">
+        <div id="topbar">
+          <div id="logo">Endless<span>Runner</span></div>
         </div>
 
-        <div class="menu-item">
-          <a href="#">Temp</a>
+        <nav id="category-nav">
+          <a href="./index.html">
+            <span class="nav-icon"></span>
+            <span>HOME</span>
+          </a>
+          <a href="./about.html">
+            <span class="nav-icon"></span>
+            <span>ABOUT</span>
+          </a>
+        </nav>
+      </header>
+
+      <main id="content-panel">
+        <div id="game-area">
+          <div id="game-wrapper">
+            <div id="game-container"></div>
+            <div id="vignette"></div>
+
+            <div id="play-btn">
+              <img src="./assets/play-button-1.png" alt="Play" />
+              <div class="hitbox play-hitbox"></div>
+            </div>
+
+            <div id="difficulty-btn">
+              <img src="./assets/difficulty-button.png" alt="Difficulty" />
+              <div class="hitbox difficulty-hitbox-easy"></div>
+              <div class="hitbox difficulty-hitbox-medium"></div>
+              <div class="hitbox difficulty-hitbox-hard"></div>
+            </div>
+
+            <div id="fade-overlay"></div>
+            <div id="blur-overlay"></div>
+          </div>
         </div>
 
-        <div class="menu-item">
-          <a href="#">Temp</a>
+        <section id="game-list-section">
+          <div id="game-list-header">
+            <div id="current-game">
+              <div class="thumb small"></div>
+              <span>CONTROLS</span>
+            </div>
+
+            <div id="panel-actions">
+              <button id="fullscreen-btn">Fullscreen</button>
+            </div>
+          </div>
+
+          <div id="controls-box">
+            <p><strong>A</strong> to run left</p>
+            <p><strong>D</strong> to run right</p>
+            <p><strong>W</strong> or <strong>Space</strong> to jump</p>
+          </div>
+        </section>
+      </main>
+
+      <footer id="footer">
+        <div id="footer-box">
+          <p id="watermark">
+            This website was created by Dominykas, Danielius, Peculiar, Hassan J.
+          </p>
+
+          <a
+            href="https://github.com/h-i-d-d-e-n/Internet-Technologies-Project"
+            id="github"
+          >
+            <img src="./images/github.png" alt="GitHub Logo" />
+            https://github.com/h-i-d-d-e-n/Internet-Technologies-Project
+          </a>
         </div>
-      </div>
-      <hr />
-    </div>
-
-    <!-- Canvas -->
-
-    <div id="game-area">
-      <div id="game-toolbar">
-        <button id="fullscreen-btn">Fullscreen</button>
-      </div>
-
-      <div id="game-wrapper">
-        <div id="game-container"></div>
-        <div id="vignette"></div>
-
-        <div id="play-btn">
-          <img src="./assets/play-button-1.png" />
-
-          <div class="hitbox play-hitbox"></div>
-        </div>
-
-        <div id="difficulty-btn">
-          <img src="./assets/difficulty-button.png" />
-
-          <div class="hitbox difficulty-hitbox-easy"></div>
-          <div class="hitbox difficulty-hitbox-medium"></div>
-          <div class="hitbox difficulty-hitbox-hard"></div>
-        </div>
-
-        <div id="fade-overlay"></div>
-        <div id="blur-overlay"></div>
-      </div>
-    </div>
-
-    <!-- End of Canvas -->
-
-    <div id="footer">
-      <hr />
-
-      <p id="watermark">
-        This website was created by Dominykas, Danielius, Peculiar, Hassan J.
-      </p>
-
-      <a
-        href="https://github.com/h-i-d-d-e-n/Internet-Technologies-Project"
-        id="github"
-      >
-        <img src="./images/github.png" alt="GitHub Logo" />
-
-        Group Github Repository
-      </a>
+      </footer>
     </div>
 
     <script type="module" src="./javascript/main.js"></script>
