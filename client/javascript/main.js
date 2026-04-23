@@ -150,46 +150,35 @@ async function startGame() {
   ------------------------- */
 
   function resizeGame() {
-    const baseWidth = 900;
-    const baseHeight = 500;
+  const baseWidth = 900;
+  const baseHeight = 500;
 
-    const scale = Math.min(
-      window.innerWidth / baseWidth,
-      window.innerHeight / baseHeight
-    );
+  const scale = Math.min(
+    window.innerWidth / baseWidth,
+    window.innerHeight / baseHeight
+  );
 
-    app.renderer.resize(baseWidth, baseHeight);
+  // ONLY scale visually
+  app.view.style.width = `${baseWidth * scale}px`;
+  app.view.style.height = `${baseHeight * scale}px`;
 
-    app.view.style.width = `${baseWidth * scale}px`;
-    app.view.style.height = `${baseHeight * scale}px`;
+  app.view.style.position = "absolute";
+  app.view.style.left = `${(window.innerWidth - baseWidth * scale) / 2}px`;
+  app.view.style.top = `${(window.innerHeight - baseHeight * scale) / 2}px`;
+}
 
-    app.view.style.position = "absolute";
-    app.view.style.left = `${(window.innerWidth - baseWidth * scale) / 2}px`;
-    app.view.style.top = `${(window.innerHeight - baseHeight * scale) / 2}px`;
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    resizeGame();
+  } else {
+    // reset styles ONLY
+    app.view.style.width = "900px";
+    app.view.style.height = "500px";
+    app.view.style.position = "";
+    app.view.style.left = "";
+    app.view.style.top = "";
   }
-
-  document.addEventListener("fullscreenchange", () => {
-    if (document.fullscreenElement) {
-      resizeGame();
-    } else {
-      app.renderer.resize(900, 500);
-      app.view.style = "";
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    if (document.fullscreenElement) resizeGame();
-  });
-
-  if (fullscreenButton) {
-    fullscreenButton.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    });
-  }
+});
 
   /* -------------------------
      GAME WORLD
