@@ -13,7 +13,7 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
-   "pixi.js": "^7.3.3",
+   "pixi.js": "7.4.0",
     "vite": "^7.3.1"
   }
 }
