@@ -6,6 +6,7 @@ import { input } from "./input.js";
 import { checkCollision } from "./collision.js";
 
 // ASSETS
+import { Assets } from "pixi.js";
 import { createFloor } from "./floor.js";
 import { createClouds } from "./clouds.js";
 import { createBuildings } from "./buildings.js";
@@ -13,6 +14,7 @@ import { createBackground } from "./grass-background.js";
 import { createMountainBackground } from "./mountain-background.js";
 import { createObstacleManager } from "./obstacles.js";
 
+const app = new Application();
 const stateManager = createStateManager();
 
 /* -------------------------
@@ -37,7 +39,6 @@ async function startGame() {
     return;
   }
 
-  // ✅ ONLY app instance
   const app = new Application({
     width: 900,
     height: 500,
@@ -61,6 +62,7 @@ async function startGame() {
   scoreDisplay.style.color = "white";
   scoreDisplay.style.fontSize = "24px";
   scoreDisplay.style.fontFamily = "monospace";
+  scoreDisplay.style.pointerEvents = "none";
   scoreDisplay.innerText = "Score: 0";
 
   gameContainer.appendChild(scoreDisplay);
@@ -81,20 +83,48 @@ async function startGame() {
   let obstacleManager = null;
   let gameOver = false;
 
+  /* -------------------------
+     DEATH EFFECT
+  ------------------------- */
+
   function triggerDeath() {
     const overlay = document.createElement("div");
+
     overlay.style.position = "absolute";
     overlay.style.left = "0";
     overlay.style.top = "0";
     overlay.style.width = "100%";
     overlay.style.height = "100%";
     overlay.style.background = "rgba(255,0,0,0.3)";
+    overlay.style.pointerEvents = "none";
     overlay.style.transition = "background 2s";
 
     gameContainer.appendChild(overlay);
 
-    setTimeout(() => (overlay.style.background = "black"), 2000);
-    setTimeout(() => location.reload(), 4000);
+    const loading_text = document.createElement("div");
+    loading_text.innerText = "loading...";
+    loading_text.style.position = "absolute";
+    loading_text.style.left = "50%";
+    loading_text.style.top = "50%";
+    loading_text.style.transform = "translate(-50%, -50%)";
+    loading_text.style.fontSize = "24px";
+    loading_text.style.color = "white";
+    loading_text.style.opacity = "0";
+    loading_text.style.transition = "opacity 2s";
+
+    overlay.appendChild(loading_text);
+
+    setTimeout(() => {
+      loading_text.style.opacity = "1";
+    }, 500);
+
+    setTimeout(() => {
+      overlay.style.background = "black";
+    }, 2000);
+
+    setTimeout(() => {
+      location.reload();
+    }, 4000);
   }
 
   setTimeout(() => {
@@ -109,16 +139,28 @@ async function startGame() {
   easyHitbox.addEventListener("click", () => {
     selectedDifficulty = "easy";
     currentDifficulty = DifficultySettings.easy;
+
+    if (gameStarted && obstacleManager) {
+      obstacleManager.setSpawnRate(currentDifficulty.spawnRate);
+    }
   });
 
   mediumHitbox.addEventListener("click", () => {
     selectedDifficulty = "medium";
     currentDifficulty = DifficultySettings.medium;
+
+    if (gameStarted && obstacleManager) {
+      obstacleManager.setSpawnRate(currentDifficulty.spawnRate);
+    }
   });
 
   hardHitbox.addEventListener("click", () => {
     selectedDifficulty = "hard";
     currentDifficulty = DifficultySettings.hard;
+
+    if (gameStarted && obstacleManager) {
+      obstacleManager.setSpawnRate(currentDifficulty.spawnRate);
+    }
   });
 
   /* -------------------------
@@ -132,6 +174,10 @@ async function startGame() {
 
     playBtn.style.display = "none";
     difficultyBtn.style.display = "none";
+
+    document.getElementById("vignette").style.opacity = "0.5";
+    document.getElementById("blur-overlay").style.opacity = "0";
+    document.getElementById("fade-overlay").style.opacity = "0";
 
     scoreInterval = setInterval(() => {
       if (!gameOver) {
@@ -150,35 +196,56 @@ async function startGame() {
   ------------------------- */
 
   function resizeGame() {
-  const baseWidth = 900;
-  const baseHeight = 500;
+    const baseWidth = 900;
+    const baseHeight = 500;
 
-  const scale = Math.min(
-    window.innerWidth / baseWidth,
-    window.innerHeight / baseHeight
-  );
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-  // ONLY scale visually
-  app.view.style.width = `${baseWidth * scale}px`;
-  app.view.style.height = `${baseHeight * scale}px`;
+    const scale = Math.min(
+      screenWidth / baseWidth,
+      screenHeight / baseHeight
+    );
 
-  app.view.style.position = "absolute";
-  app.view.style.left = `${(window.innerWidth - baseWidth * scale) / 2}px`;
-  app.view.style.top = `${(window.innerHeight - baseHeight * scale) / 2}px`;
-}
+    app.renderer.resize(baseWidth, baseHeight);
 
-document.addEventListener("fullscreenchange", () => {
-  if (document.fullscreenElement) {
-    resizeGame();
-  } else {
-    // reset styles ONLY
-    app.view.style.width = "900px";
-    app.view.style.height = "500px";
-    app.view.style.position = "";
-    app.view.style.left = "";
-    app.view.style.top = "";
+    app.view.style.width = `${baseWidth * scale}px`;
+    app.view.style.height = `${baseHeight * scale}px`;
+
+    app.view.style.position = "absolute";
+    app.view.style.left = `${(screenWidth - baseWidth * scale) / 2}px`;
+    app.view.style.top = `${(screenHeight - baseHeight * scale) / 2}px`;
   }
-});
+
+  document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement) {
+      resizeGame();
+    } else {
+      app.renderer.resize(900, 500);
+
+      app.view.style.width = "";
+      app.view.style.height = "";
+      app.view.style.position = "";
+      app.view.style.left = "";
+      app.view.style.top = "";
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    if (document.fullscreenElement) {
+      resizeGame();
+    }
+  });
+
+  if (fullscreenButton) {
+    fullscreenButton.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen();
+      } else {
+        document.exitFullscreen();
+      }
+    });
+  }
 
   /* -------------------------
      GAME WORLD
@@ -197,23 +264,33 @@ document.addEventListener("fullscreenchange", () => {
   ------------------------- */
 
   app.ticker.add(() => {
-    if (!gameStarted || gameOver) return;
+    if (!gameStarted) return;
 
-    floor.update(currentDifficulty.speedMultiplier);
-    obstacleManager.update(currentDifficulty.speedMultiplier);
+    if (!gameOver) {
+      floor.update(currentDifficulty.speedMultiplier);
+      obstacleManager.update(currentDifficulty.speedMultiplier);
 
-    if (input.left) player.sprite.x -= 0.1;
-    if (input.right) player.sprite.x += 0.1;
+      if (input.left) player.sprite.x -= 0.1;
+      if (input.right) player.sprite.x += 0.1;
 
-    player.update(input);
+      player.update(input);
 
-    for (const obstacle of obstacleManager.getObstacles()) {
-      if (checkCollision(player.sprite, obstacle)) {
-        gameOver = true;
-        app.ticker.stop();
-        clearInterval(scoreInterval);
-        triggerDeath();
+      const obstacles = obstacleManager.getObstacles();
+
+      for (const obstacle of obstacles) {
+        if (checkCollision(player.sprite, obstacle)) {
+          gameOver = true;
+
+          app.ticker.stop();
+          clearInterval(scoreInterval);
+
+          triggerDeath();
+        }
       }
+
+      if (player.sprite.x < 50) player.sprite.x = 50;
+      if (player.sprite.x > app.screen.width - 50)
+        player.sprite.x = app.screen.width - 50;
     }
   });
 }
