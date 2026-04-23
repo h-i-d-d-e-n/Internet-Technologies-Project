@@ -145,52 +145,54 @@ async function startGame() {
   });
 
   /* -------------------------
-     FULLSCREEN (FILL MODE)
-  ------------------------- */
+   FULLSCREEN (SAFE SCALE)
+------------------------- */
 
-  function resizeGame() {
-    const screenWidth = window.innerWidth;
-    const screenHeight = window.innerHeight;
+function resizeGame() {
+  const baseWidth = 900;
+  const baseHeight = 500;
 
-    // fill entire screen
-    app.renderer.resize(screenWidth, screenHeight);
+  const screenWidth = window.innerWidth;
+  const screenHeight = window.innerHeight;
 
-    app.view.style.width = `${screenWidth}px`;
-    app.view.style.height = `${screenHeight}px`;
+  const scaleX = screenWidth / baseWidth;
+  const scaleY = screenHeight / baseHeight;
 
-    app.view.style.position = "absolute";
-    app.view.style.left = "0px";
-    app.view.style.top = "0px";
+  // stretch to fill screen (no black bars)
+  app.view.style.width = `${baseWidth * scaleX}px`;
+  app.view.style.height = `${baseHeight * scaleY}px`;
+
+  app.view.style.position = "absolute";
+  app.view.style.left = "0px";
+  app.view.style.top = "0px";
+}
+
+document.addEventListener("fullscreenchange", () => {
+  if (document.fullscreenElement) {
+    resizeGame();
+  } else {
+    // reset
+    app.view.style.width = "900px";
+    app.view.style.height = "500px";
+    app.view.style.position = "";
+    app.view.style.left = "";
+    app.view.style.top = "";
   }
+});
 
-  document.addEventListener("fullscreenchange", () => {
-    if (document.fullscreenElement) {
-      resizeGame();
+window.addEventListener("resize", () => {
+  if (document.fullscreenElement) resizeGame();
+});
+
+if (fullscreenButton) {
+  fullscreenButton.addEventListener("click", () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen();
     } else {
-      // reset back to original
-      app.renderer.resize(900, 500);
-
-      app.view.style.width = "900px";
-      app.view.style.height = "500px";
-      app.view.style.position = "";
-      app.view.style.left = "";
-      app.view.style.top = "";
+      document.exitFullscreen();
     }
   });
-
-  window.addEventListener("resize", () => {
-    if (document.fullscreenElement) resizeGame();
-  });
-
-  if (fullscreenButton) {
-    fullscreenButton.addEventListener("click", () => {
-      if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen();
-      } else {
-        document.exitFullscreen();
-      }
-    });
-  }
+}
 
   /* -------------------------
      GAME WORLD
