@@ -37,7 +37,6 @@ async function startGame() {
     return;
   }
 
-  // ✅ ONLY app instance
   const app = new Application({
     width: 900,
     height: 500,
@@ -146,31 +145,36 @@ async function startGame() {
   });
 
   /* -------------------------
-     FULLSCREEN
+     FULLSCREEN (FILL MODE)
   ------------------------- */
 
   function resizeGame() {
-  const screenWidth = window.innerWidth;
-  const screenHeight = window.innerHeight;
+    const screenWidth = window.innerWidth;
+    const screenHeight = window.innerHeight;
 
-  // resize renderer to full screen
-  app.renderer.resize(screenWidth, screenHeight);
+    // fill entire screen
+    app.renderer.resize(screenWidth, screenHeight);
 
-  // make canvas fill screen
-  app.view.style.width = `${screenWidth}px`;
-  app.view.style.height = `${screenHeight}px`;
+    app.view.style.width = `${screenWidth}px`;
+    app.view.style.height = `${screenHeight}px`;
 
-  app.view.style.position = "absolute";
-  app.view.style.left = "0px";
-  app.view.style.top = "0px";
-}
+    app.view.style.position = "absolute";
+    app.view.style.left = "0px";
+    app.view.style.top = "0px";
+  }
 
   document.addEventListener("fullscreenchange", () => {
     if (document.fullscreenElement) {
       resizeGame();
     } else {
+      // reset back to original
       app.renderer.resize(900, 500);
-      app.view.style = "";
+
+      app.view.style.width = "900px";
+      app.view.style.height = "500px";
+      app.view.style.position = "";
+      app.view.style.left = "";
+      app.view.style.top = "";
     }
   });
 
