@@ -13,7 +13,6 @@ import { createBackground } from "./grass-background.js";
 import { createMountainBackground } from "./mountain-background.js";
 import { createObstacleManager } from "./obstacles.js";
 
-const app = new Application();
 const stateManager = createStateManager();
 
 /* -------------------------
