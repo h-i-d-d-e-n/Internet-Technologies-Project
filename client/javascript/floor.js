@@ -3,7 +3,7 @@ import { Assets, Sprite } from "pixi.js";
 export const ROAD_BASE_SPEED = 0.8;
 
 export async function createFloor(app) {
-  const texture = await Assets.load("/client/assets/road-loop.png");
+  const texture = await Assets.load("/assets/road-loop.png");
 
   const segmentWidth = texture.width;
   const floors = [];

@@ -71,8 +71,8 @@ class GrassBackground {
 
 export async function createBackground(app) {
   const [grassTexture, treeTexture] = await Promise.all([
-    Assets.load("/client/assets/grass.png"),
-    Assets.load("/client/assets/tree.png"),
+    Assets.load("/assets/grass.png"),
+    Assets.load("/assets/tree.png"),
   ]);
 
   const background = new GrassBackground(app, grassTexture, treeTexture);
