@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";
+import { Assets, Container, Sprite } from "pixi.js";
 
 class GrassBackground {
   constructor(app, grassTexture, treeTexture) {
@@ -71,8 +71,8 @@ class GrassBackground {
 
 export async function createBackground(app) {
   const [grassTexture, treeTexture] = await Promise.all([
-    Assets.load("/assets/grass.png"),
-    Assets.load("/assets/tree.png"),
+    Assets.load("./assets/grass.png"),
+    Assets.load("./assets/tree.png"),
   ]);
 
   const background = new GrassBackground(app, grassTexture, treeTexture);

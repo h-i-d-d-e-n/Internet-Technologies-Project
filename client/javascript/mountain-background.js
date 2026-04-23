@@ -1,4 +1,4 @@
-import * as PIXI from "pixi.js";
+import { Assets, Container, Sprite } from "pixi.js";
 
 class MountainBackground {
   constructor(app, texture) {
@@ -48,7 +48,7 @@ class MountainBackground {
 }
 
 export async function createMountainBackground(app) {
-  const texture = await Assets.load("/assets/mountain.png");
+  const texture = await Assets.load("./assets/mountain.png");
 
   const background = new MountainBackground(app, texture);
   app.stage.addChild(background.container);

@@ -1,7 +1,7 @@
-import * as PIXI from "pixi.js";
+import { Assets, Sprite } from "pixi.js";
 
 export async function createBuildings(app) {
-  const texture = await Assets.load("/assets/double-glass.png");
+  const texture = await Assets.load("./assets/double-glass.png");
   const speed = 0.2;
   const buildings = [];
 
