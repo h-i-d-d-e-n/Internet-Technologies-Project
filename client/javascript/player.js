@@ -4,7 +4,15 @@ export async function createPlayer(app) {
   const response = await fetch("/assets/project-player-temp.json");
   const data = await response.json();
 
-  const atlas = await Assets.load("/assets/" + data.meta.image);
+  let atlas;
+
+  if (data.meta.image.startsWith("data:")) {
+    // base64 image → use directly
+    atlas = Texture.from(data.meta.image);
+  } else {
+    // normal file
+    atlas = await Assets.load("/assets/" + data.meta.image);
+  }
 
   const frames = Object.keys(data.frames)
     .sort((a, b) => {
@@ -15,7 +23,9 @@ export async function createPlayer(app) {
     .map((key) => {
       const f = data.frames[key].frame;
 
-      return new Texture(atlas.baseTexture, new Rectangle(f.x, f.y, f.w, f.h));
+      const baseTexture = atlas.baseTexture || atlas;
+
+      return new Texture(baseTexture, new Rectangle(f.x, f.y, f.w, f.h));
     });
 
   const player = new AnimatedSprite(frames);
