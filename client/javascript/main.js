@@ -6,6 +6,7 @@ import { input } from "./input.js";
 import { checkCollision } from "./collision.js";
 
 // ASSETS
+import { Assets } from "pixi.js";
 import { createFloor } from "./floor.js";
 import { createClouds } from "./clouds.js";
 import { createBuildings } from "./buildings.js";

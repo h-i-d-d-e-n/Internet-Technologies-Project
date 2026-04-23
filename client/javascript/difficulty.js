@@ -1,3 +1,5 @@
+import { Assets } from "pixi.js";
+
 const DifficultySettings = {
   easy: {
     speed: 2,

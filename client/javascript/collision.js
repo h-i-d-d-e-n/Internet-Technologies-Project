@@ -1,3 +1,5 @@
+import { Assets } from "pixi.js";
+
 export function checkCollision(a, b) {
   const aLeft = a.x - a.hitbox.width / 2 + a.hitbox.offsetX;
   const aRight = aLeft + a.hitbox.width;

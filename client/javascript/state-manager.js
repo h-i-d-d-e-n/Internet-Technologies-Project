@@ -1,4 +1,5 @@
 import { GameState } from "./game-state.js";
+import { Assets } from "pixi.js";
 
 export function createStateManager() {
   let currentState = GameState.MENU;

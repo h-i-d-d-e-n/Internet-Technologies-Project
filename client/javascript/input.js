@@ -1,3 +1,5 @@
+import { Assets } from "pixi.js";
+
 export const input = {
   left: false,
   right: false,
