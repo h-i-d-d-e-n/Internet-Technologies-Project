@@ -4,14 +4,7 @@ export async function createPlayer(app) {
   const response = await fetch("/assets/project-player-temp.json");
   const data = await response.json();
 
-  const image = new Image();
-  image.src = data.meta.image;
-
-  await new Promise((resolve) => {
-    image.onload = resolve;
-  });
-
-  const atlas = Texture.from(image);
+  const atlas = await Assets.load("/assets/" + data.meta.image);
 
   const frames = Object.keys(data.frames)
     .sort((a, b) => {
